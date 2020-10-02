@@ -51,9 +51,14 @@ public struct Line: View {
     // see https://stackoverflow.com/a/62370919
     // This lets geometry be recalculated when device rotates. However it doesn't cover issue of app changing
     // from full screen to split view. Not possible in SwiftUI? Feedback submitted to apple FB8451194.
+    #if os(iOS)
     let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
         .makeConnectable()
         .autoconnect()
+    #else
+    let orientationChanged = NotificationCenter.default.publisher(for: Notification.Name("none"))
+        .makeConnectable()
+    #endif
     
 	/// The content and behavior of the `Line`.
 	/// Draw the background if showing the full line (?) and the `showBackground` option is set. Above that draw the line, and then the data indicator if the graph is currently being touched.
@@ -84,6 +89,7 @@ public struct Line: View {
 					self.frame = geometry.frame(in: .local)	// recalculate layout with new frame
 				}
 			}
+            
 			
             .gesture(DragGesture()
                 .onChanged({ value in
