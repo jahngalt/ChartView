@@ -32,7 +32,7 @@ extension CGPoint {
             if min <= 0 {
                 stepHeight = (frame.size.height - padding) / CGFloat(max - min)
             } else {
-                stepHeight = (frame.size.height - padding) / CGFloat(max + min)
+                stepHeight = (frame.size.height - padding) / CGFloat(max - min)
             }
         }
 
