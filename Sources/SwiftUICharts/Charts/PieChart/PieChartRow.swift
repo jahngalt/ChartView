@@ -43,7 +43,7 @@ public struct PieChartRow: View {
                         endDeg: self.slices[index].endDeg,
                         index: index,
                         backgroundColor: self.style.backgroundColor.startColor,
-                        accentColor: self.style.foregroundColor.rotate(for: index)
+                        accentColor: ColorGradient(Color.red, Color.blue)
                     )
                     .scaleEffect(currentTouchedIndex == index ? 1.1 : 1)
                     .animation(Animation.spring())
